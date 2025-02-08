@@ -7,7 +7,7 @@ export default async function getMessage() {
   const queue = 'order_queue';
 
   try {
-    const connection = await amqp.connect('amqp://localhost');
+    const connection = await amqp.connect('amqp://192.168.1.100');
 
 
     const channel = await connection.createChannel();
