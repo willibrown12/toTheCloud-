@@ -5,7 +5,8 @@
     "scripts": {
         "start": "nodemon index.js",
         "dev": "nodemon src/index.ts",
-        "init": "tsc --init"
+        "init": "tsc --init",
+        "compile": "tsc"
     },
     "keywords": [],
     "author": "",
