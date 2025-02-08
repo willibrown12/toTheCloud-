@@ -1,11 +1,11 @@
 
 services:
   rmq-client:
-    image: client
+    image: rmq-client
     ports:
       - "4201:4201"
   rmq-api:
-    image: vacation-api
+    image: rmq-api
     ports:
       - "3001:3001"
   
