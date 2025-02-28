@@ -44,7 +44,8 @@ services:
       # Opens port 3306 on the container
       - "3306"
     volumes:
-      - "./init.sql:/docker-entrypoint-initdb.d/init.sql"
+        - my-db:/var/lib/mysql  # This ensures data persists across restarts
+        - "./init.sql:/docker-entrypoint-initdb.d/init.sql"
 # Names our volume
 volumes:
   my-db:
