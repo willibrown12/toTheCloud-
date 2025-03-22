@@ -39,9 +39,9 @@ services:
     ports:
       - "3306:3306"
     volumes:
-      - my-db:/var/lib/mysql
+      - db_my-db:/var/lib/mysql
       - /home/willi/toTheCloud-/db/init.sql:/docker-entrypoint-initdb.d/init.sql
 
 volumes:
-  my-db:
-
+  db_my-db:
+    external: true
