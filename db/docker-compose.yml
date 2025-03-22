@@ -36,12 +36,11 @@ services:
     restart: always
     environment:
       MYSQL_ROOT_PASSWORD: "password"
-      MYSQL_DATABASE: "vacations"  # Automatically create the 'vacations' database
     ports:
       - "3306:3306"
     volumes:
       - my-db:/var/lib/mysql
-      - ./init.sql:/docker-entrypoint-initdb.d/init.sql  # Make sure init.sql exists in the same folder as docker-compose.yml
+      - /home/willi/toTheCloud-/db/init.sql:/docker-entrypoint-initdb.d/init.sql
 
 volumes:
   my-db:
