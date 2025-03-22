@@ -42,5 +42,5 @@ services:
       - /home/willi/toTheCloud-/db/init.sql:/docker-entrypoint-initdb.d/init.sql
 
 volumes:
-  db_my-db: # Don't declare it as external here
+  my-db: # Don't declare it as external here
 
