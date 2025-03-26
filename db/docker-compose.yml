@@ -1,5 +1,5 @@
 services:
- rmq-client:
+  rmq-client:
     image: rmq-client
     ports:
       - "4201:4201"
@@ -21,7 +21,7 @@ services:
 
   rabbitmq:
     image: rabbitmq:3-management-alpine
-    container_name: 'rabbitmq'
+    container_name: rabbitmq
     ports:
       - "5672:5672"
       - "15672:15672"
@@ -33,13 +33,13 @@ services:
     image: mysql
     restart: always
     environment:
-     MYSQL_DATABASE: 'db'
+      MYSQL_DATABASE: db
       # So you don't have to use root, but you can if you like
-     MYSQL_USER: 'root'
+      MYSQL_USER: root
       # You can use whatever password you like
-     MYSQL_PASSWORD: 'password'
+      MYSQL_PASSWORD: password
       # Password for root access
-     MYSQL_ROOT_PASSWORD: 'password'
+      MYSQL_ROOT_PASSWORD: password
     ports:
       - "3306:3306"
     volumes:
@@ -47,4 +47,4 @@ services:
       - /home/willi/toTheCloud-/db/init.sql:/docker-entrypoint-initdb.d/init.sql
 
 volumes:
- my-db: # Don't declare it as external here
+  my-db:
