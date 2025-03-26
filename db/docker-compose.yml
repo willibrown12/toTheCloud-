@@ -1,3 +1,5 @@
+ 
+services:
   rmq-client:
     image: rmq-client
     ports:
@@ -38,6 +40,15 @@
     volumes:
       - my-db:/var/lib/mysql
       - /home/willi/toTheCloud-/db/init.sql:/docker-entrypoint-initdb.d/init.sql
+    healthcheck:
+      test: ["CMD", "mysqladmin", "ping", "-h", "localhost"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+    command: >
+      bash -c "docker-entrypoint.sh mysqld & 
+      sleep 10 && 
+      mysql -uroot -p$MYSQL_ROOT_PASSWORD < /docker-entrypoint-initdb.d/init.sql"
 
 volumes:
- my-db: # Don't declare it as external here
+  my-db:
