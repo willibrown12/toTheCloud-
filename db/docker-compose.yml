@@ -1,4 +1,4 @@
- 
+services:
   rmq-client:
     image: rmq-client
     ports:
@@ -41,4 +41,4 @@
       - /home/willi/toTheCloud-/db/init.sql:/docker-entrypoint-initdb.d/init.sql
 
 volumes:
- my-db: # Don't declare it as external her
+ my-db: # Don't declare it as external here
