@@ -1,4 +1,3 @@
-
 services:
   rmq-client:
     image: rmq-client
@@ -19,6 +18,9 @@ services:
     image: vacation-api
     ports:
       - "3000:3000"
+    depends_on:
+      db:
+        condition: service_healthy
 
   rabbitmq:
     image: rabbitmq:3-management-alpine
@@ -31,7 +33,8 @@ services:
       - ~/.docker-conf/rabbitmq/log/:/var/log/rabbitmq/
 
   db:
-    image: mysql
+    image: mysql:8.0  # Pinned version for stability
+    container_name: 'mysql-db'
     restart: always
     environment:
       MYSQL_ROOT_PASSWORD: "password"
@@ -40,7 +43,11 @@ services:
     volumes:
       - my-db:/var/lib/mysql
       - /home/willi/toTheCloud-/db/init.sql:/docker-entrypoint-initdb.d/init.sql
+    healthcheck:
+      test: ["CMD", "mysqladmin", "ping", "-h", "localhost"]
+      interval: 5s
+      timeout: 10s
+      retries: 10
 
 volumes:
- my-db: # Don't declare it as external here
-
+  my-db:
