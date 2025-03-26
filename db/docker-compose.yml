@@ -1,4 +1,5 @@
 services:
+  # Your existing services (unchanged)
   rmq-client:
     image: rmq-client
     ports:
@@ -32,19 +33,21 @@ services:
       - ~/.docker-conf/rabbitmq/data/:/var/lib/rabbitmq/
       - ~/.docker-conf/rabbitmq/log/:/var/log/rabbitmq/
 
+  # Fixed db service
   db:
-    image: mysql:8.0  # Pinned version for stability
+    image: mysql:9.2  # Changed to match your existing data version
     container_name: 'mysql-db'
     restart: always
     environment:
       MYSQL_ROOT_PASSWORD: "password"
+      MYSQL_INITDB_SKIP_TZINFO: 1  # Speeds up initialization
     ports:
       - "3306:3306"
     volumes:
       - my-db:/var/lib/mysql
       - /home/willi/toTheCloud-/db/init.sql:/docker-entrypoint-initdb.d/init.sql
     healthcheck:
-      test: ["CMD", "mysqladmin", "ping", "-h", "localhost"]
+      test: ["CMD", "mysqladmin", "ping", "-p${MYSQL_ROOT_PASSWORD}", "-h", "localhost"]
       interval: 5s
       timeout: 10s
       retries: 10
