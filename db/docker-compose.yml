@@ -29,7 +29,6 @@ services:
       - ~/.docker-conf/rabbitmq/data/:/var/lib/rabbitmq/
       - ~/.docker-conf/rabbitmq/log/:/var/log/rabbitmq/
 
-  db:
     db:
     image: mysql
     restart: always
