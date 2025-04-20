@@ -30,11 +30,12 @@ services:
       - ~/.docker-conf/rabbitmq/data/:/var/lib/rabbitmq/
       - ~/.docker-conf/rabbitmq/log/:/var/log/rabbitmq/
 
+
   db:
     image: mysql
     restart: always
     environment:
-      MYSQL_DATABASE:  # Remove this line or leave it empty
+      MYSQL_DATABASE: rabbitOrder vacations
       MYSQL_USER: user
       MYSQL_PASSWORD: password
       MYSQL_ROOT_PASSWORD: password
