@@ -1,3 +1,4 @@
+version: '3.8'
 services:
   rmq-client:
     image: rmq-client
@@ -29,12 +30,11 @@ services:
       - ~/.docker-conf/rabbitmq/data/:/var/lib/rabbitmq/
       - ~/.docker-conf/rabbitmq/log/:/var/log/rabbitmq/
 
-
   db:
     image: mysql
     restart: always
     environment:
-      MYSQL_DATABASE: rabbitOrder vacations
+      MYSQL_DATABASE:  # Remove this line or leave it empty
       MYSQL_USER: user
       MYSQL_PASSWORD: password
       MYSQL_ROOT_PASSWORD: password
