@@ -44,6 +44,15 @@ INSERT INTO `users` VALUES (1,'user@user.com','user','user macuser');
 CREATE DATABASE IF NOT EXISTS `vacations` /*!40100 DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci */ /*!80016 DEFAULT ENCRYPTION='N' */;
 USE `vacations`;
 
+-- Grant privileges to the 'user' for both databases from any host (%)
+GRANT ALL PRIVILEGES ON `rabbitOrder`.* TO 'user'@'%';
+GRANT ALL PRIVILEGES ON `vacations`.* TO 'user'@'%';
+
+-- If you want to restrict access to only the API container's IP address (more secure but less flexible if the IP changes),
+-- you would replace '%' with '172.18.0.7'. However, since Docker container IPs can change, using '%' for the Docker network is often simpler.
+
+-- Important: Flush privileges to apply the changes
+FLUSH PRIVILEGES;
 -- Table structure for table `followers`
 DROP TABLE IF EXISTS `followers`;
 CREATE TABLE `followers` (
