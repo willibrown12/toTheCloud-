@@ -27,25 +27,25 @@ services:
       - "5672:5672"
       - "15672:15672"
     volumes:
-      - ~/.docker-conf/rabbitmq/data/:/var/lib/rabbitmq/
-      - ~/.docker-conf/rabbitmq/log/:/var/log/rabbitmq/
+      - rabbitmq_data:/var/lib/rabbitmq/
+      - rabbitmq_log:/var/log/rabbitmq/
 
   db:
-    image: mysql
+    image: mysql:latest
     restart: always
     environment:
-      MYSQL_DATABASE: rabbitOrder, vacations
+      MYSQL_DATABASE: rabbitOrder vacations
       MYSQL_USER: user
       MYSQL_PASSWORD: password
       MYSQL_ROOT_PASSWORD: password
     ports:
       - "3306:3306"
     volumes:
-      # Specify separate volumes for each database
-      - db-rabbitOrder:/var/lib/mysql/rabbitOrder
-      - db-vacations:/var/lib/mysql/vacations
-      - /home/willi/toTheCloud-/db/init.sql:/docker-entrypoint-initdb.d/init.sql
+      - db_data:/var/lib/mysql
+      - ./db/init.sql:/docker-entrypoint-initdb.d/init.sql
 
 volumes:
-  db-rabbitOrder:
-  db-vacations:
+  rabbitmq_data:
+  rabbitmq_log:
+  db_data:
+
